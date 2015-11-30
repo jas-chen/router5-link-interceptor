@@ -8,8 +8,8 @@ npm install --save router5-link-interceptor
 
 ## Usage
 ```javascript
-var router = getRouter5InstanceSomehow();
 var linkInterceptor = require('router5-link-interceptor');
+var router = getRouter5InstanceSomehow();
 
 linkInterceptor(router, function callback(err) {
   // handle navigation error here.
