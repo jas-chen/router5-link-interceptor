@@ -3,7 +3,7 @@ Link interceptor for router5.
 
 ## Install
 ```
-npm install --save-dev router5-link-interceptor
+npm install --save router5-link-interceptor
 ```
 
 ## Usage
