@@ -1,5 +1,5 @@
 # router5 link interceptor
-Link interceptor for router5.
+Link interceptor for [router5](http://router5.github.io/).
 
 ## Install
 ```
