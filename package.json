@@ -1,6 +1,6 @@
 {
   "name": "router5-link-interceptor",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Link interceptor for router5.",
   "main": "index.js",
   "scripts": {
