@@ -12,10 +12,16 @@ function getParams(href) {
   if (splitHref[1]) {
     splitHref[1].split('&')
       .forEach(function(param) {
-        var sp = param.split('=');
-        var name = sp[0];
-        sp.shift();
-        params[name] = window.decodeURIComponent(sp.length === 1? sp[0]: sp.join('='));
+        var i = param.indexOf('=');
+
+        if (i === -1) {
+          params[window.decodeURIComponent(param)] = '';
+          return;
+        }
+
+        var name = window.decodeURIComponent(param.substr(0, i));
+        var value = window.decodeURIComponent(param.substr(i + 1));
+        params[name] = value
       });
   }
 
