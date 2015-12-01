@@ -22,7 +22,9 @@ function getParams(href) {
   return params;
 }
 
-module.exports = function(router, cb) {
+var defaultOpts = {};
+
+module.exports = function(router, opts, cb) {
   var clickEvent = document.ontouchstart ? 'touchstart' : 'click';
 
   function which(e) {
@@ -57,7 +59,20 @@ module.exports = function(router, cb) {
     if (toRouteState) {
       e.preventDefault();
       var name = toRouteState.name;
-      router.navigate(name, getParams(el.href), {}, cb);
+      var params = getParams(el.href);
+
+      var finalOpts;
+      if (typeof opts === 'function') {
+        finalOpts = opts(name, params);
+      } else {
+        finalOpts = opts;
+      }
+
+      if (!finalOpts) {
+        finalOpts = defaultOpts;
+      }
+
+      router.navigate(name, params, finalOpts, cb);
     }
   }
 
