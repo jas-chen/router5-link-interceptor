@@ -62,4 +62,8 @@ module.exports = function(router, cb) {
   }
 
   document.addEventListener(clickEvent, onclick, false);
+
+  return function stop() {
+    document.removeEventListener(clickEvent, onclick, false);
+  }
 };
