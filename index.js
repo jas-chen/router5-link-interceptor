@@ -58,6 +58,7 @@ module.exports = function(router, opts, cb) {
     // check target
     if (el.target) return;
 
+    if (!el.href) return;
 
     var toRouteState = router.matchUrl(el.href);
     if (toRouteState) {
