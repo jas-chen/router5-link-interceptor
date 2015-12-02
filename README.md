@@ -30,8 +30,9 @@ Intercept all click events of links and call the [Router5 navigate method](http:
 ```javascript
 var linkInterceptor = require('router5-link-interceptor');
 var router = getRouter5InstanceSomehow();
+
 function callback(err) {
-  console.error(err);
+  if (err) console.error(err);
 }
 
 linkInterceptor(router, {}, callback);
@@ -43,7 +44,7 @@ var linkInterceptor = require('router5-link-interceptor');
 var router = getRouter5InstanceSomehow();
 
 function callback(err) {
-  console.error(err);
+  if (err) console.error(err);
 }
 
 linkInterceptor(router, {reload: true}, callback);
@@ -63,7 +64,7 @@ function opts(routeName, routeParams) {
 }
 
 function callback(err) {
-  console.error(err);
+  if (err) console.error(err);
 }
 
 linkInterceptor(router, opts, callback);
