@@ -5,37 +5,35 @@
 
 'use strict';
 
-function getParams(href) {
-  var params = {};
-  var splitHref = href.split('?');
-
-  if (splitHref[1]) {
-    splitHref[1].split('&')
-      .forEach(function(param) {
-        var i = param.indexOf('=');
-
-        if (i === -1) {
-          params[window.decodeURIComponent(param)] = '';
-          return;
-        }
-
-        var name = window.decodeURIComponent(param.substr(0, i));
-        var value = window.decodeURIComponent(param.substr(i + 1));
-        params[name] = value
-      });
-  }
-
-  return params;
-}
-
-var defaultOpts = {};
-
 module.exports = function(router, opts, cb) {
   var clickEvent = document.ontouchstart ? 'touchstart' : 'click';
 
   function which(e) {
     e = e || window.event;
     return null === e.which ? e.button : e.which;
+  }
+
+  function getParams(href) {
+    var params = {};
+    var splitHref = href.split('?');
+
+    if (splitHref[1]) {
+      splitHref[1].split('&')
+        .forEach(function(param) {
+          var i = param.indexOf('=');
+
+          if (i === -1) {
+            params[window.decodeURIComponent(param)] = '';
+            return;
+          }
+
+          var name = window.decodeURIComponent(param.substr(0, i));
+          var value = window.decodeURIComponent(param.substr(i + 1));
+          params[name] = value
+        });
+    }
+
+    return params;
   }
 
   function onclick(e) {
@@ -72,10 +70,6 @@ module.exports = function(router, opts, cb) {
         finalOpts = opts(name, params);
       } else {
         finalOpts = opts;
-      }
-
-      if (!finalOpts) {
-        finalOpts = defaultOpts;
       }
 
       router.navigate(name, params, finalOpts, cb);
