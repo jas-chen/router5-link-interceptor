@@ -17,12 +17,12 @@ module.exports = function(router, opts, cb) {
     var params = {};
     var splitHref = href.split('?');
 
-    if (splitHref[1]) {
+    if (splitHref[1] && splitHref[1].length) {
       splitHref[1].split('&')
         .forEach(function(param) {
           var i = param.indexOf('=');
 
-          if (i === -1) {
+          if (i === -1 || i === param.length - 1) {
             params[window.decodeURIComponent(param)] = '';
             return;
           }
