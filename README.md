@@ -1,5 +1,5 @@
 # router5 link interceptor
-Link interceptor for [router5](http://router5.github.io/).
+Link interceptor plugin for [router5](http://router5.github.io/).
 
 ## Install
 ```
@@ -10,17 +10,16 @@ npm install --save router5-link-interceptor
 
 ## API
 ```javascript
-linkInterceptor(router5, opts, [callback]);
+router.usePlugin(linkInterceptor(opts, [callback]));
 ```
-Intercept all click events of links and call the [Router5 navigate method](http://router5.github.io/docs/navigation.html). Query string of the link will be parsed into `routeParams`.
+Register a plugin to intercept all click events of links and call the [Router5 navigate method](http://router5.github.io/docs/navigation.html). Query string of the link will be parsed into `routeParams`.
 
 ###### Arguments
-1. `router5` (*Router5*): Router5 instance.
-2. `opts` (*Object* or *Function*): The `opts` argument of [Router5 navigate method](http://router5.github.io/docs/navigation.html#navigating-to-a-specific-route). If you pass a Function, it will be called with `fn(routeName, routeParams)`.
-3. `[callback]` (*Function*): The `callback` argument of [Router5 navigate method](http://router5.github.io/docs/navigation.html#navigating-to-a-specific-route).
+1. `opts` (*Object* or *Function*): The `opts` argument of [Router5 navigate method](http://router5.github.io/docs/navigation.html#navigating-to-a-specific-route). If you pass a Function, it will be called with `fn(routeName, routeParams)`.
+2. `[callback]` (*Function*): The `callback` argument of [Router5 navigate method](http://router5.github.io/docs/navigation.html#navigating-to-a-specific-route).
 
-###### Returns
-(*Function*): A function to stop the interceptor.
+###### Start and stop
+The plugin only intercepts links when your router instance is started.
 
 
 
@@ -35,7 +34,7 @@ function callback(err) {
   if (err) console.error(err);
 }
 
-linkInterceptor(router, {}, callback);
+router.usePlugin(linkInterceptor({}, callback));
 ```
 
 #### With opts object
@@ -47,7 +46,7 @@ function callback(err) {
   if (err) console.error(err);
 }
 
-linkInterceptor(router, {reload: true}, callback);
+router.usePlugin(linkInterceptor({reload: true}, callback));
 ```
 
 #### With opts function
@@ -67,7 +66,7 @@ function callback(err) {
   if (err) console.error(err);
 }
 
-linkInterceptor(router, opts, callback);
+router.usePlugin(linkInterceptor(opts, callback));
 ```
 
 ## License
