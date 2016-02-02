@@ -71,7 +71,7 @@ router.usePlugin(linkInterceptor(opts, callback));
 
 ## Changelog
 
-- **3.0.0** - Make the link interceptor as a router5 plugin(#1, #2).
+- **3.0.0** - Make the link interceptor as a router5 plugin([d380fb2](https://github.com/jas-chen/router5-link-interceptor/commit/d380fb276a83cedf0b18ffd0348b95ef33479821),  [#1](https://github.com/jas-chen/router5-link-interceptor/issues/1)).
 
 
 ## License
