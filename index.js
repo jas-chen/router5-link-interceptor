@@ -5,9 +5,24 @@
 
 'use strict';
 
-module.exports = function(router, opts, cb) {
-  var clickEvent = document.ontouchstart ? 'touchstart' : 'click';
+module.exports = function(opts, cb) {
+  return function(router) {
+    var clickEvent = document.ontouchstart ? 'touchstart' : 'click';
+    var clickHandler = onClick(router, opts, cb);
 
+    return {
+      name: 'LINK_INTERCEPTOR',
+      onStart: function() {
+        document.addEventListener('click', clickHandler, false);
+      },
+      onStop: function() {
+        document.removeEventListener('click', clickHandler);
+      }
+    };
+  };
+};
+
+function onClick(router, opts, cb) {
   function which(e) {
     e = e || window.event;
     return null === e.which ? e.button : e.which;
@@ -36,7 +51,7 @@ module.exports = function(router, opts, cb) {
     return params;
   }
 
-  function onclick(e) {
+  return function onclick(e) {
     if (1 !== which(e)) return;
 
     if (e.metaKey || e.ctrlKey || e.shiftKey) return;
@@ -75,11 +90,5 @@ module.exports = function(router, opts, cb) {
 
       router.navigate(name, params, finalOpts, cb);
     }
-  }
-
-  document.addEventListener(clickEvent, onclick, false);
-
-  return function stop() {
-    document.removeEventListener(clickEvent, onclick, false);
   }
 };
