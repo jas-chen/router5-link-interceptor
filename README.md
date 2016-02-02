@@ -69,5 +69,10 @@ function callback(err) {
 router.usePlugin(linkInterceptor(opts, callback));
 ```
 
+## Changelog
+
+- **3.0.0** - Make the link interceptor as a router5 plugin(#1, #2).
+
+
 ## License
 The MIT License.
