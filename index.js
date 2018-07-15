@@ -79,7 +79,7 @@ function onClick(router, opts, cb) {
     if (toRouteState) {
       e.preventDefault();
       var name = toRouteState.name;
-      var params = getParams(el.href);
+      var params = Object.assign(getParams(el.href), toRouteState.params);
 
       var finalOpts;
       if (typeof opts === 'function') {
