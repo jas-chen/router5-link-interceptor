@@ -13,10 +13,10 @@ module.exports = function(opts, cb) {
     return {
       name: 'LINK_INTERCEPTOR',
       onStart: function() {
-        document.addEventListener('click', clickHandler, false);
+        document.addEventListener(clickEvent, clickHandler, false);
       },
       onStop: function() {
-        document.removeEventListener('click', clickHandler);
+        document.removeEventListener(clickEvent, clickHandler);
       }
     };
   };
