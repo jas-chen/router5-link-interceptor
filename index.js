@@ -22,6 +22,18 @@ module.exports = function(opts, cb) {
   };
 };
 
+function merge(object, other) {
+  var merged = {};
+  Object.keys(object || []).forEach(function (key) {
+    merged[key] = object[key];
+  });
+  Object.keys(other || []).forEach(function (key) {
+    merged[key] = other[key];
+  });
+
+  return merged;
+}
+
 function onClick(router, opts, cb) {
   function which(e) {
     e = e || window.event;
@@ -79,7 +91,7 @@ function onClick(router, opts, cb) {
     if (toRouteState) {
       e.preventDefault();
       var name = toRouteState.name;
-      var params = Object.assign(getParams(el.href), toRouteState.params);
+      var params = merge(getParams(el.href), toRouteState.params);
 
       var finalOpts;
       if (typeof opts === 'function') {
