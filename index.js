@@ -13,14 +13,26 @@ module.exports = function(opts, cb) {
     return {
       name: 'LINK_INTERCEPTOR',
       onStart: function() {
-        document.addEventListener('click', clickHandler, false);
+        document.addEventListener(clickEvent, clickHandler, false);
       },
       onStop: function() {
-        document.removeEventListener('click', clickHandler);
+        document.removeEventListener(clickEvent, clickHandler);
       }
     };
   };
 };
+
+function merge(object, other) {
+  var merged = {};
+  Object.keys(object || []).forEach(function (key) {
+    merged[key] = object[key];
+  });
+  Object.keys(other || []).forEach(function (key) {
+    merged[key] = other[key];
+  });
+
+  return merged;
+}
 
 function onClick(router, opts, cb) {
   function which(e) {
@@ -79,7 +91,7 @@ function onClick(router, opts, cb) {
     if (toRouteState) {
       e.preventDefault();
       var name = toRouteState.name;
-      var params = getParams(el.href);
+      var params = merge(getParams(el.href), toRouteState.params);
 
       var finalOpts;
       if (typeof opts === 'function') {
